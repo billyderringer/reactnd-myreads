@@ -12,10 +12,19 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    showSearchPage: false,
+    books: []
   }
 
   componentDidMount() {
+    this.getBooks()
+  }
+
+  toggleSearch = () => {
+    this.setState({ showSearchPage: !this.state.showSearchPage })
+  }
+
+  getBooks = () => {
     BooksAPI.getAll().then(books => {
       this.setState(() => ({
         books
@@ -23,8 +32,14 @@ class BooksApp extends React.Component {
     })
   }
 
-  toggleSearch = () => {
-    this.setState({ showSearchPage: !this.state.showSearchPage })
+  updateBooks = (book, selected) => {
+    BooksAPI.update(book, selected).then(() => {
+      this.getBooks()
+    })
+  }
+
+  handleChange = (book, selected) => {
+    this.updateBooks(book, selected)
   }
 
   render() {
@@ -38,9 +53,21 @@ class BooksApp extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            <Shelf shelfTitle="Currently Reading" filter="currentlyReading" books={books}/>
-            <Shelf shelfTitle="Want to Read" filter="wantToRead" books={books}/>
-            <Shelf shelfTitle="Read" filter="read" books={books}/>
+            <Shelf
+              shelfTitle="Currently Reading"
+              filter="currentlyReading"
+              books={books}
+              handleChange={this.handleChange}/>
+            <Shelf
+              shelfTitle="Want to Read"
+              filter="wantToRead"
+              books={books}
+              handleChange={this.handleChange}/>
+            <Shelf
+              shelfTitle="Read"
+              filter="read"
+              books={books}
+              handleChange={this.handleChange}/>
             <div className="open-search">
               <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
             </div>
