@@ -38,16 +38,24 @@ class BooksApp extends React.Component {
     })
   }
 
+  /*
+  Pass handleChange() for shelf changer from
+  App -> (handles update)
+  Shelf ->
+  Book (get book from here) ->
+  ShelfChanger (get selected shelf value from here)
+  */
   handleChange = (book, selected) => {
     this.updateBooks(book, selected)
   }
 
   render() {
+    //destructure state
     const { books } = this.state
     return (
       <div className="app">
         {this.state.showSearchPage ?
-          <SearchBar toggleSearch={this.toggleSearch}/>
+          <SearchBar books={books} handleChange={this.handleChange} toggleSearch={this.toggleSearch}/>
          : (
           <div className="list-books">
             <div className="list-books-title">
