@@ -1,6 +1,7 @@
 import React,{Component} from "react"
 import {search} from "../BooksAPI"
 import Book from "./Book"
+import {Link} from "react-router-dom";
 
 class SearchBar extends Component{
   state = {
@@ -32,9 +33,11 @@ class SearchBar extends Component{
     return(
       <div className="search-books">
         <div className="search-books-bar">
-          <button className="close-search" onClick={() => this.props.toggleSearch()}>Close</button>
-          <div className="search-books-input-wrapper">
-            {/*
+          <Link to='/'>
+            <button className="close-search">Close</button>
+          </Link>
+            <div className="search-books-input-wrapper">
+              {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
                   You can find these search terms here:
                   https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
@@ -42,14 +45,14 @@ class SearchBar extends Component{
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-            <input
-              onChange={this.handleChange}
-              value={searchValue}
-              type="text"
-              placeholder="Search by title or author"/>
-
-          </div>
+              <input
+                onChange={this.handleChange}
+                value={searchValue}
+                type="text"
+                placeholder="Search by title or author"/>
+            </div>
         </div>
+
         <div className="search-books-results">
           <ol className="books-grid">
             {searchValue !== "" ?
@@ -59,7 +62,7 @@ class SearchBar extends Component{
               myBooks={myBooks}
               searchBooks={searchBooks}/>:
               <li>
-                Please enter search for results
+                Search for results
               </li>
             }
 
