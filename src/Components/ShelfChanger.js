@@ -18,9 +18,12 @@ class ShelfChanger extends Component {
 
   render() {
     //destructure props
-    const { book, filter } = this.props
+    const { myBooks, book, filter } = this.props
     //set filter to none for book searches & proper shelf for others
-    const shelf = filter === "none" ? "none" : book.shelf
+
+    const filteredShelf = myBooks.filter(myBook => myBook.id.includes(book.id))
+    const shelf = filter === "custom" ? filteredShelf[0] !== undefined ? filteredShelf[0].shelf : 'none' : book.shelf
+
     return (
       <div  className="book-shelf-changer">
         {/*current shelf passed in from API in App.js*/}

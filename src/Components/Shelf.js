@@ -12,14 +12,14 @@ class Shelf extends Component{
   */
   render() {
     //destructure props
-    const { books, shelfTitle, filter } = this.props
+    const { myBooks, shelfTitle, filter } = this.props
     return(
       <div className="bookshelf">
         <h2 className="bookshelf-title">{shelfTitle}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             <Book
-              books={books}
+              myBooks={myBooks}
               filter={filter}
               handleChange={this.props.handleChange}/>
           </ol>

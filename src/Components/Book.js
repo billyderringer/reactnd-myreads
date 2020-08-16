@@ -16,16 +16,19 @@ class Book extends Component{
 
   render() {
     //desctucture props
-    const { books, filter } = this.props
+    const { myBooks, searchBooks, filter } = this.props
+    const chooseLibrary = searchBooks ? searchBooks : myBooks
     return(
       <Fragment>
-        {books &&
-        books.length > 0 &&
-        books.filter(book => (book.shelf === filter ||
-          filter === "none") &&
+        {chooseLibrary &&
+        chooseLibrary.length > 0 &&
+        chooseLibrary
+          .filter(book => (book.shelf === filter ||
+          filter === "custom"))
+          .filter(book => (
           //filter books without thumbnails
           book.imageLinks !== undefined &&
-          book.imageLinks.thumbnail !== undefined)
+          book.imageLinks.thumbnail !== undefined))
           .map(book => (
           <li key={book.id}>
             <div className="book">
@@ -40,6 +43,8 @@ class Book extends Component{
                 <ShelfChanger
                   filter={filter}
                   handleChange={this.handleChange}
+                  myBooks={myBooks}
+                  searchBooks={searchBooks}
                   book={book}/>
               </div>
               {/*Output book title*/}

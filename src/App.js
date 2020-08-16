@@ -13,7 +13,7 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: []
+    myBooks: []
   }
 
   componentDidMount() {
@@ -27,7 +27,7 @@ class BooksApp extends React.Component {
   getBooks = () => {
     BooksAPI.getAll().then(books => {
       this.setState(() => ({
-        books
+        myBooks: books
       }))
     })
   }
@@ -51,11 +51,11 @@ class BooksApp extends React.Component {
 
   render() {
     //destructure state
-    const { books } = this.state
+    const { myBooks } = this.state
     return (
       <div className="app">
         {this.state.showSearchPage ?
-          <SearchBar books={books} handleChange={this.handleChange} toggleSearch={this.toggleSearch}/>
+          <SearchBar myBooks={myBooks} handleChange={this.handleChange} toggleSearch={this.toggleSearch}/>
          : (
           <div className="list-books">
             <div className="list-books-title">
@@ -64,17 +64,17 @@ class BooksApp extends React.Component {
             <Shelf
               shelfTitle="Currently Reading"
               filter="currentlyReading"
-              books={books}
+              myBooks={myBooks}
               handleChange={this.handleChange}/>
             <Shelf
               shelfTitle="Want to Read"
               filter="wantToRead"
-              books={books}
+              myBooks={myBooks}
               handleChange={this.handleChange}/>
             <Shelf
               shelfTitle="Read"
               filter="read"
-              books={books}
+              myBooks={myBooks}
               handleChange={this.handleChange}/>
             <div className="open-search">
               <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>

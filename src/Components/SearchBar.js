@@ -5,7 +5,7 @@ import Book from "./Book"
 class SearchBar extends Component{
   state = {
     searchValue: '',
-    books: []
+    searchBooks: []
   }
 
   //set searchValue state on input then call handleBookSearch()
@@ -21,13 +21,14 @@ class SearchBar extends Component{
   handleBookSearch = () => {
     search(this.state.searchValue).then(books => {
       this.setState(() => ({
-        books: books
+        searchBooks: books
       }))
     })
   }
 
   render() {
-    const { books } = this.state
+    const { searchBooks, searchValue } = this.state
+    const { handleChange, myBooks } = this.props
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -41,13 +42,27 @@ class SearchBar extends Component{
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-            <input onChange={this.handleChange} value={this.state.searchValue} type="text" placeholder="Search by title or author"/>
+            <input
+              onChange={this.handleChange}
+              value={searchValue}
+              type="text"
+              placeholder="Search by title or author"/>
 
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-                <Book handleChange={this.props.handleChange} filter='none' books={books}/>
+            {searchValue !== "" ?
+              <Book
+              handleChange={handleChange}
+              filter='custom'
+              myBooks={myBooks}
+              searchBooks={searchBooks}/>:
+              <li>
+                Please enter search for results
+              </li>
+            }
+
           </ol>
         </div>
       </div>
