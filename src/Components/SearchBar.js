@@ -1,7 +1,7 @@
-import React,{Component} from "react"
-import {search} from "../BooksAPI"
+import React,{ Component } from "react"
+import { search } from "../BooksAPI"
 import Book from "./Book"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class SearchBar extends Component{
   state = {
