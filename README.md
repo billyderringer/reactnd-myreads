@@ -6,6 +6,8 @@ This is the final assessment project for Udacity's React Fundamentals course. Th
 
 To get started using MyReads right away:
 
+* clone repository in command terminal with `git clone https://github.com/billyderringer/reactnd-myreads.git`
+* change directory with `cd reactnd-myreads`
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
