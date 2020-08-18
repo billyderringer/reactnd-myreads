@@ -1,9 +1,9 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
+import React from "react"
+import * as BooksAPI from "./BooksAPI"
+import "./App.css"
 import SearchBar from "./Components/SearchBar"
 import Shelf from "./Components/Shelf"
-import {Route, Link} from 'react-router-dom'
+import {Route, Link} from "react-router-dom"
 
 class BooksApp extends React.Component {
   state = {
@@ -31,7 +31,7 @@ class BooksApp extends React.Component {
   /*
   Pass handleChange() for shelf changer from
   App -> (handles update)
-  Shelf ->
+  Shelf/SearchBar (both components use handleChange()) ->
   Book (get book from here) ->
   ShelfChanger (get selected shelf value from here)
   */
@@ -40,18 +40,20 @@ class BooksApp extends React.Component {
   }
 
   render() {
+
     //destructure state
     const { myBooks } = this.state
+
     return (
       <div className="app">
-        <Route exact path='/search'
+        <Route exact path="/search"
                render={() => (
           <SearchBar
             myBooks={myBooks}
             handleChange={this.handleChange}/>
         )}>
         </Route>
-        <Route exact path='/'
+        <Route exact path="/"
                render={() => (
           <div className="list-books">
             <div className="list-books-title">
@@ -72,7 +74,7 @@ class BooksApp extends React.Component {
               filter="read"
               myBooks={myBooks}
               handleChange={this.handleChange}/>
-            <Link to='/search'
+            <Link to="/search"
                   className="open-search">
               <button>
                 Add a book

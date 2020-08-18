@@ -2,12 +2,13 @@ import React, {Component} from "react"
 
 class ShelfChanger extends Component {
   state = {
-    value: ''
+    value: ""
   }
+
   /*
   Pass handleChange() for shelf changer from
   App -> (handles update)
-  Shelf ->
+  Shelf/SearchBar (both components use handleChange()) ->
   Book (get book from here) ->
   ShelfChanger (get selected shelf value from here)
   */
@@ -17,17 +18,20 @@ class ShelfChanger extends Component {
   }
 
   render() {
+
     //destructure props
     const { myBooks, book, filter } = this.props
-    //set filter to none for book searches & proper shelf for others
 
+    //filter shelf if searched book matches books in library
     const filteredShelf = myBooks.filter(myBook => myBook.id.includes(book.id))
+    //determine if book is from SearchBar or Shelf and assign shelf accordingly
     const shelf = filter === "custom" ? filteredShelf[0] !== undefined ? filteredShelf[0].shelf : 'none' : book.shelf
 
     return (
       <div  className="book-shelf-changer">
         {/*current shelf passed in from API in App.js*/}
-        <select defaultValue={shelf} onChange={this.handleChange}>
+        <select defaultValue={shelf}
+                onChange={this.handleChange}>
           <option disabled>Move to...</option>
           <option
             value="currentlyReading">Currently Reading

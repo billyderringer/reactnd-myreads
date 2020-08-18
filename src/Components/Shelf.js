@@ -1,32 +1,24 @@
-import React, { Component } from "react"
+import React from "react"
 import Book from "./Book"
 
-class Shelf extends Component{
+function Shelf(props){
 
-  /*
-  Pass handleChange() for shelf changer from
-  App -> (handles update)
-  Shelf ->
-  Book (get book from here) ->
-  ShelfChanger (get selected shelf value from here)
-  */
-  render() {
-    //destructure props
-    const { myBooks, shelfTitle, filter } = this.props
-    return(
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">{shelfTitle}</h2>
-        <div className="bookshelf-books">
-          <ol className="books-grid">
-            <Book
-              myBooks={myBooks}
-              filter={filter}
-              handleChange={this.props.handleChange}/>
-          </ol>
-        </div>
+  //destructure props
+  const { myBooks, shelfTitle, filter, handleChange } = props
+
+  return(
+    <div className="bookshelf">
+      <h2 className="bookshelf-title">{shelfTitle}</h2>
+      <div className="bookshelf-books">
+        <ol className="books-grid">
+          <Book
+            myBooks={myBooks}
+            filter={filter}
+            handleChange={handleChange}/>
+        </ol>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Shelf

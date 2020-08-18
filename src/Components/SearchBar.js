@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 class SearchBar extends Component{
   state = {
-    searchValue: '',
+    searchValue: "",
     searchBooks: []
   }
 
   //set searchValue state on input then call handleBookSearch()
-  handleChange = (e) => {
+  handleSearchChange = (e) => {
     this.setState({
       searchValue: e.target.value
     },() => {
@@ -28,8 +28,11 @@ class SearchBar extends Component{
   }
 
   render() {
+
+    //destructure state/props
     const { searchBooks, searchValue } = this.state
     const { handleChange, myBooks } = this.props
+
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -46,7 +49,7 @@ class SearchBar extends Component{
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
               <input
-                onChange={this.handleChange}
+                onChange={this.handleSearchChange}
                 value={searchValue}
                 type="text"
                 placeholder="Search by title or author"/>
