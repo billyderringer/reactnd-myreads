@@ -10,5 +10,3 @@ To get started using MyReads right away:
 * change directory with `cd reactnd-myreads`
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
-
-
